@@ -2,6 +2,11 @@ class SecretShare:
     def __init__(self, n, k):
         self.n, self.k = n, k
 
+    def __repr__(self):
+        return '<{}> object: n={}, k={}'.format(
+            type(self).__name__, self.n, self.k)
+
+
     def split(self, secret):
         """
         Takes in the secret, and returns

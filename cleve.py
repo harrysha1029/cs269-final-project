@@ -13,3 +13,6 @@ class CleveSecretShare(SecretShare):
 
     def recombine(self, shares):
         pass
+
+x = CleveSecretShare(4, 5)
+print(x)
