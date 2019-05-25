@@ -1,6 +1,8 @@
 class SecretShare:
-    def __init__(self, n, k):
-        self.n, self.k = n, k
+    def __init__(self, parties, k=None):
+        self.parties = parties
+        self.n = len(parties)
+        self.k = k
 
     def __repr__(self):
         return '<{}> object: n={}, k={}'.format(
@@ -19,5 +21,16 @@ class SecretShare:
         Takes in a k tuple of shares, and returns
         the secret if all k shares are valid
         """
+        pass
+
+class Party():
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return '<{}> object: name: {}'.format(
+            type(self).__name__, self.name)
+
+    def interact(self, state=None):
         pass
 
