@@ -83,6 +83,7 @@ class HillerySecretShare1(SecretShare):
             for i, p in enumerate(self.parties):
                 p.measurements.append(result[i])
                 p.directions.append(self.measure_list)
+            self.A.key.append(result[0])
         else:
             for p in self.parties:
                 p.directions.append('fail')
@@ -120,7 +121,6 @@ def make_key(A, B, C, key_len=10):
         if res is not None:
             n_valid += 1
 
-    A.key = [x for x in A.measurements if x != 'fail']
     recombine(B, C)
 
 
