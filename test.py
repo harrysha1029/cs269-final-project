@@ -52,7 +52,7 @@ def sum_state_to_quantum(sum_state):
     return create_arbitrary_state(normalized)
 
 
-sum_state = create_poly_state(2, 3, M)
+sum_state = create_poly_state(2, 1, 3, M)
 
 sim = WavefunctionSimulator()
 print(sim.wavefunction(sum_state_to_quantum(sum_state)))
