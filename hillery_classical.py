@@ -73,11 +73,12 @@ class HillerySecretShare1(SecretShare):
         """
         return tuple(self.measure_list) in VALID_DIRECTIONS
 
-    def run(self):
+    def run(self, verbose=0):
         """ Measures the qubits after each
         party has announced their measurement direction.
         """
         if self.check_valid():
+            if verbose==1: print('success')
             pq = address_qubits(self.program)
             result = self.qc.run(pq).flatten()
             for i, p in enumerate(self.parties):
@@ -85,6 +86,7 @@ class HillerySecretShare1(SecretShare):
                 p.directions.append(self.measure_list)
             self.A.key.append(result[0])
         else:
+            if verbose==1: print('execution failed')
             for p in self.parties:
                 p.directions.append('fail')
                 p.measurements.append('fail')

@@ -1,0 +1,4 @@
+pyquil==2.6.0
+numpy==1.16.2
+grove==0.0.13
+sympy==1.4
