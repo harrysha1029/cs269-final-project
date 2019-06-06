@@ -34,7 +34,6 @@ class Hillery2Party(Party):
         secret_share.ready = True
 
 
-
 class Alice(Hillery2Party):
     def __init__(self, name, secret):
         super().__init__(name)
@@ -85,7 +84,7 @@ class HillerySecretShare2(SecretShare):
         pq.if_then(self.A.secret_ro, p1, p0)
         self.program = pq
 
-    def run(self):
+    def run(self, verbose=0):
         if self.check_valid():
             self.create_program()
             pq = address_qubits(self.program, qubit_mapping = {
@@ -95,7 +94,8 @@ class HillerySecretShare2(SecretShare):
                 self.A.secret_qubit:3
                 })
             pq = Program(self.secret_gate) + pq
-            print(sim.wavefunction(pq))
+            if verbose:
+                print('The resulting wavefunction is ', sim.wavefunction(pq))
         else:
             print('There was an error in the protocol')
         self.ready = False
@@ -106,5 +106,5 @@ if __name__ == '__main__':
     C = Hillery2Party('C')
     ss = HillerySecretShare2((A, B, C))
     B.interact(ss)
-    ss.run()
+    ss.run(1)
 

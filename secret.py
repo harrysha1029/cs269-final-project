@@ -14,14 +14,12 @@ class SecretShare:
         Takes in the secret, and returns
         Return an n-tuple of shares
         """
-        pass
 
-    def recombine(self, shares):
+    def recombine(self, parties):
         """
         Takes in a k tuple of shares, and returns
         the secret if all k shares are valid
         """
-        pass
 
 class Party():
     def __init__(self, name):
