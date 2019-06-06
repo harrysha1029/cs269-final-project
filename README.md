@@ -9,4 +9,4 @@ This algorithm allows a party Alice to establish a shared bitstring with Bob and
 This algorithm allows a party Alice to share a quantum state between two Bob and Charlie, such that they can only recover the state if they cooperate. This is implemented in `hillery_quantum.py`
 
 ## Cleve - Multiparty
-This algorithm shares a secret quantum state between n parties such that at least k of them are required to recover the secret state.
+This algorithm shares a secret quantum state between n parties such that at least k of them are required to recover the secret state. It is implemented in `cleve.py`
