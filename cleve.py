@@ -7,6 +7,7 @@ Cleve's multiparty quantum secret sharing scheme.
 import numpy as np
 from sympy import sieve
 from sympy import Matrix
+from grove.alpha.arbitrary_state.arbitrary_state import create_arbitrary_state
 from secret import SecretShare
 from cleve_setup import create_poly_state, num2bin
 from secret import Party
@@ -52,7 +53,9 @@ class CleveSecretShare(SecretShare):
     def recombine(self, parties):
         """
         Given a list of parties, reconstructs
-        the secret
+        the secret. Returns a dictionary representation
+        of the resulting state, as well as a pyquil
+        program that constructs that state.
         """
 
         parties = [p.name for p in parties]
@@ -95,11 +98,20 @@ class CleveSecretShare(SecretShare):
                 new_k = k
             count_after_map[new_k] = v
 
-        return count_after_map
+        max_num = 2**len(k)-1
+        coeff_vec = np.zeros(max_num).astype(np.complex)
+        count_ind = {int(k, 2): v for k, v in count_after_map.items()}
+        for k ,v in count_ind.items():
+            coeff_vec[k] = v
+
+        normalized = coeff_vec/np.linalg.norm(coeff_vec)
+        sum_state = create_arbitrary_state(normalized)
+
+        return count_after_map, sum_state
 
 
 if __name__ == '__main__':
     parties = [CleveParty(x) for x in range(1, 6)]
     x = CleveSecretShare(parties, 3)
-    x.split([(1, 4/5), (3, 3/5j)])
+    x.split([(1, 4/5), (3, (3/5)*1j)])
     print(x.recombine(parties[:3]))

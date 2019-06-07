@@ -25,14 +25,14 @@ def measure_Y(q, reg):
     pq = Program()
     pq += RX(np.pi/2, q)
     pq += MEASURE(q, reg)
-    # pq += YINV(q)
+    pq += RX(-np.pi/2, q)
     return pq
 
 def measure_X(q, reg):
     pq = Program()
     pq += H(q)
     pq += MEASURE(q, reg)
-    # pq += H(q)
+    pq += H(q)
     return pq
 
 def measure_Bell(q0, q1, ro0, ro1):
@@ -41,8 +41,8 @@ def measure_Bell(q0, q1, ro0, ro1):
     pq += H(q0)
     pq += MEASURE(q0, ro0)
     pq += MEASURE(q1, ro1)
-    # pq += H(q0)
-    # pq += CNOT(q0, q1)
+    pq += H(q0)
+    pq += CNOT(q0, q1)
     return pq
 
 def list_to_gate(l):

@@ -83,6 +83,12 @@ class HillerySecretShare2(SecretShare):
         p0 = Program().if_then(self.A.ro, p01, p00)
         pq.if_then(self.A.secret_ro, p1, p0)
         self.program = pq
+        self.post_process()
+
+    def post_process(self):
+        self.program += CNOT(self.A.secret_qubit, self.A.qubit)
+        self.program += H(self.A.secret_qubit)
+        self.program += H(self.B.qubit)
 
     def run(self, verbose=0):
         if self.check_valid():
