@@ -1,4 +1,4 @@
 pyquil==2.6.0
-numpy==1.16.2
+numpy==1.22.0
 quantum-grove
 sympy
